@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnImport = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextCode = new System.Windows.Forms.RichTextBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // btnImport
@@ -44,6 +45,7 @@
             this.btnImport.TabIndex = 1;
             this.btnImport.Text = "Importar Arquivo";
             this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // btnRun
             // 
@@ -57,20 +59,27 @@
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
+            // richTextCode
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 67);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(445, 506);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.richTextCode.Location = new System.Drawing.Point(12, 67);
+            this.richTextCode.Name = "richTextCode";
+            this.richTextCode.Size = new System.Drawing.Size(445, 506);
+            this.richTextCode.TabIndex = 2;
+            this.richTextCode.Text = "";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "c";
+            this.openFileDialog.FileName = "openFD";
+            this.openFileDialog.InitialDirectory = "@C:\\";
+            this.openFileDialog.Title = "Localizar Arquivo";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 585);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.richTextCode);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnRun);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -84,7 +93,8 @@
 
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextCode;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
