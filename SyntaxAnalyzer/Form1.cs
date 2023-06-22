@@ -49,5 +49,10 @@ namespace SyntaxAnalyzer
                 }
             }
         }
+
+        private static void validate_fale()
+        {
+
+        }
     }
 }
