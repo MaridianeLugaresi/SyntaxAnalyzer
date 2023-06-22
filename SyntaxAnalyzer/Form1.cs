@@ -18,11 +18,6 @@ namespace SyntaxAnalyzer
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnImport_Click(object sender, EventArgs e)
         {
             DialogResult dr = this.openFileDialog.ShowDialog();
@@ -50,8 +45,28 @@ namespace SyntaxAnalyzer
             }
         }
 
-        private static void validate_fale()
+        private void button1_Click(object sender, EventArgs e)
+        {    
+            validarTokens();
+        }
+
+        private bool validarTokens()
         {
+            const int finalArquivo = -1;
+            StreamReader arquivo = null;
+
+            int caracter;
+            char c;
+
+            arquivo = File.OpenText(openFileDialog.FileName);
+
+            while ((caracter = arquivo.Read()) != finalArquivo){
+                c = (char)caracter;
+                Console.WriteLine(caracter);
+            }
+
+            return true;
+
 
         }
     }
