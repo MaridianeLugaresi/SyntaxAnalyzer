@@ -67,7 +67,6 @@ namespace SyntaxAnalyzer
 
             return true;
 
-
         }
     }
 }

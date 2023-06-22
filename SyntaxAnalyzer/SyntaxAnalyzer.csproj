@@ -52,7 +52,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Code.cs" />
+    <Compile Include="Objects\Constants.cs" />
+    <Compile Include="Objects\DoWhileCommand.cs" />
+    <Compile Include="Objects\ForCommand.cs" />
+    <Compile Include="Objects\IfCommand.cs" />
     <Compile Include="Objects\Token.cs" />
+    <Compile Include="Objects\WhileCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -91,5 +97,6 @@
     <None Include="Resources\run96.ico" />
     <None Include="Resources\run.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
