@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SyntaxAnalyzer.Objects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,7 +47,8 @@ namespace SyntaxAnalyzer
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {    
+        {
+            IfCommand ifCommand = new IfCommand("null");
             validarTokens();
         }
 
