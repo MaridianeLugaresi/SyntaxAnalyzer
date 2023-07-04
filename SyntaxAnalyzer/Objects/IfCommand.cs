@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,186 +12,216 @@ namespace SyntaxAnalyzer.Objects
     public class IfCommand
     {
         public string Code { get; set; }
+		public string Tk { get; set; }
+		public List<string> Tokens { get; set; } = new List<string>();
 
-        public IfCommand(string code)
+        public IfCommand(string code, string tk)
         {
 			Code = code;
+			Tk = tk;
         }
 
         public void Validate()
         {
-			string tk;
-
-			//S(tk);
+			ProcessaPopulaArrayTokens();
+			getToken();
+			S();
 		}
 
-		private bool S(string tk)
+		private bool S()
 		{
-			if (tk == Constants.TKIf)
+			if (Tk == Constants.TKIf)
 			{
-				//getToken();
-				if (tk == Constants.TKAbreParenteses)
+				getToken();
+				if (Tk == Constants.TKAbreParenteses)
 				{
-					//getToken();
-					if (C(tk))
+					getToken();
+					if (C())
 					{
-						if (tk == Constants.TKFechaParenteses)
+						if (Tk == Constants.TKFechaParenteses)
 						{
-							//getToken();
-							if (tk == Constants.TKAbreChaves)
+							getToken();
+							if (Tk == Constants.TKAbreChaves)
 							{
-								//getToken();
-								if (S(tk))
+								getToken();
+								if (S())
 								{
-									if (tk == Constants.TKFechaChaves)
+									if (Tk == Constants.TKFechaChaves)
 									{
-									 //getToken();
+										getToken();
 										return true;
-									} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token '}'"); return false; }
-								} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava uma expressão para validar o comando IF"); return false; }
-							} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token '{'"); return false; }
-						} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token ')'"); return false; }
-					} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava uma expressão para validar o comando IF"); return false; }
-				} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token '('"); return false; }
-			} else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token 'if'"); return false; }
+									} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '}'"); return false; }
+								} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o comando IF"); return false; }
+							} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '{'"); return false; }
+						} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+					} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o comando IF"); return false; }
+				} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
+			} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token 'if'"); return false; }
 		}
 
 		//C -> E R E 
-		private bool C(string tk)
+		private bool C()
 		{
-			if (E(tk))
+			if (E())
 			{
-				if (R(tk))
+				if (R())
 				{
-					if (E(tk))
+					if (E())
 					{
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um comando expressão"); return false; }
+					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um comando expressão"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 		}
 
 		//E -> ID | NUM | E OP E | ( E ) 
-		private bool E(string tk)
+		private bool E()
 		{
-			if (ID(tk))
+			if (ID())
 			{
 				return true;
 			}
-			else if (NUM(tk))
+			else if (NUM())
 			{
 				return true;
 			}
-			else if (E(tk))
+			else if (E())
 			{
-				if (Operator(tk))
+				if (Operator())
 				{
-					if (E(tk))
+					if (E())
 					{
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um comando expressão"); return false; }
+					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 			}
-			else if (tk == Constants.TKAbreParenteses)
+			else if (Tk == Constants.TKAbreParenteses)
 			{
-				//getToken();
-				if (E(tk))
+				getToken();
+				if (E())
 				{
-					if (tk == Constants.TKFechaParenteses)
+					if (Tk == Constants.TKFechaParenteses)
 					{
-						//getToken();
+						getToken();
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token ')'"); return false; }
+					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um comando expressão"); return false; }
+				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava o token '('"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
 		}
 
-		private bool NUM(string tk)
+		private bool NUM()
         {
-            if (Regex.IsMatch(tk, @"^-?[0-9][0-9,\.]+$"))
+            if (Regex.IsMatch(Tk, @"^-?[0-9][0-9,\.]+$"))
 			{
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava encontrar um valor numerico"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava encontrar um valor numerico"); return false; }
 		}
 
-		private bool ID(string tk)
+		private bool ID()
 		{
-			if (Regex.IsMatch(tk, @"^.*?const\s+(\w+\s+)?(\w)\s+=.*$"))
+			if (Regex.IsMatch(Tk, @"^.*?const\s+(\w+\s+)?(\w)\s+=.*$"))
 			{
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava encontrar uma constante"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava encontrar uma constante"); return false; }
 		}
 
 		//R -> == | != | < | > | <= | >= 
-		private bool R(string tk)
+		private bool R()
 		{
-			if (tk == Constants.TKIgualLogico)
+			if (Tk == Constants.TKIgualLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKDiferenteLogico)
+			else if (Tk == Constants.TKDiferenteLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKMenorLogico)
+			else if (Tk == Constants.TKMenorLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKMaiorLogico)
+			else if (Tk == Constants.TKMaiorLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKMenorIgualLogico)
+			else if (Tk == Constants.TKMenorIgualLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKMaiorIgualLogico)
+			else if (Tk == Constants.TKMaiorIgualLogico)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 		}
 
 		//Operator -> + | - | * | / 
-		private bool Operator(string tk)
+		private bool Operator()
 		{
-			if (tk == Constants.TKSoma)
+			if (Tk == Constants.TKSoma)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKSubtracao)
+			else if (Tk == Constants.TKSubtracao)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKMultiplicacao)
+			else if (Tk == Constants.TKMultiplicacao)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else if (tk == Constants.TKDivisao)
+			else if (Tk == Constants.TKDivisao)
 			{
-				//getToken();
+				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + tk + " " + "Esperava um operador(+, -, /, *)"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador(+, -, /, *)"); return false; }
 		}
-    }
+
+		private void getToken()
+		{
+			Tk = Tokens[0];
+			Tokens.RemoveAt(0);
+		}
+
+		private void ProcessaPopulaArrayTokens()
+		{
+			string padrao = @"(\()|(\))";
+
+			using (StreamReader sr = new StreamReader("C:\\teste\\TesteC.c"))
+			{
+				string linha;
+
+				while ((linha = sr.ReadLine()) != null)
+				{
+					string[] tokens = Regex.Split(linha, padrao);
+
+					// Print the tokens
+					foreach (string token in tokens)
+					{
+						Tokens.Add(token);
+					}
+				}
+			}
+		}
+	}
 }

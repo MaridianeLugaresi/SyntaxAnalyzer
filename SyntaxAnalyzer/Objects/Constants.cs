@@ -8,6 +8,11 @@ namespace SyntaxAnalyzer.Objects
 {
     static class Constants
     {
+        public const string TKInt = "int";
+        public const string TKFloat = "float";
+        public const string TKChar = "char";
+        public const string TKVolatile = "volatile";
+        public const string TKDouble = "double";
         public const string TKIf = "if";
         public const string TKElse = "else";
         public const string TKDo = "do";
@@ -46,6 +51,10 @@ namespace SyntaxAnalyzer.Objects
         public const string TKAtribuicaoResto = "%=";
         public const string TKAtribuicaoDeslocamentoDireta = ">>=";
         public const string TKAtribuicaoDeslocamentoEsquerda = "<<=";
+        public const string TKVirgula = ",";
+        public const string TKPontoEVirgula = ";";
+        public const string TKDoisPontos = ":";
+        public const string TKDuploMais = "++";
 
     }
 }

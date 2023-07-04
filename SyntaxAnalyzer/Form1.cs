@@ -48,8 +48,10 @@ namespace SyntaxAnalyzer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IfCommand ifCommand = new IfCommand("null");
-            validarTokens();
+            //IfCommand ifCommand = new IfCommand(richTextCode.ToString(), null);
+            //validarTokens();
+            IfCommand ifCommand = new IfCommand("if(a>b){c = 1;}", null);
+            ifCommand.Validate();
         }
 
         private bool validarTokens()
