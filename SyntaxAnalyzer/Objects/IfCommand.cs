@@ -21,11 +21,14 @@ namespace SyntaxAnalyzer.Objects
 			Tk = tk;
         }
 
-        public void Validate()
+        public void Validate(StreamReader arquivo)
         {
-			ProcessaPopulaArrayTokens();
+			ProcessaPopulaArrayTokens(arquivo);
 			getToken();
-			S();
+			if (S())
+			{
+				Message.ShowSuccessMessage("Tokens validados com sucesso");
+			}
 		}
 
 		private bool S()
@@ -121,18 +124,20 @@ namespace SyntaxAnalyzer.Objects
         {
             if (Regex.IsMatch(Tk, @"^-?[0-9][0-9,\.]+$"))
 			{
-				return true;
+                getToken();
+                return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava encontrar um valor numerico"); return false; }
+			else { return false; }
 		}
 
 		private bool ID()
 		{
-			if (Regex.IsMatch(Tk, @"^.*?const\s+(\w+\s+)?(\w)\s+=.*$"))
+			if (Regex.IsMatch(Tk, @"^[a-zA-Z]+$"))
 			{
+				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava encontrar uma constante"); return false; }
+			else { return false; }
 		}
 
 		//R -> == | != | < | > | <= | >= 
@@ -203,25 +208,22 @@ namespace SyntaxAnalyzer.Objects
 			Tokens.RemoveAt(0);
 		}
 
-		private void ProcessaPopulaArrayTokens()
+		private void ProcessaPopulaArrayTokens(StreamReader sr)
 		{
-			string padrao = @"(\()|(\))";
+			string padrao = @"(\()|(\w+\s+)|(==)|(\w+\s+)|(\))|(\s+\{)|(\})";
+			string linha;
 
-			using (StreamReader sr = new StreamReader("C:\\teste\\TesteC.c"))
+			while ((linha = sr.ReadLine()) != null)
 			{
-				string linha;
+				string[] tokens = Regex.Split(linha, padrao);
 
-				while ((linha = sr.ReadLine()) != null)
+				// Print the tokens
+				foreach (string token in tokens)
 				{
-					string[] tokens = Regex.Split(linha, padrao);
-
-					// Print the tokens
-					foreach (string token in tokens)
-					{
-						Tokens.Add(token);
-					}
+					Tokens.Add(token);
 				}
 			}
+			
 		}
 	}
 }

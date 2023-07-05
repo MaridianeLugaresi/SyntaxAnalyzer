@@ -13,5 +13,10 @@ namespace SyntaxAnalyzer.Objects
         {
             MessageBox.Show(message, "Configuration", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
+        public static void ShowSuccessMessage(string message)
+        {
+            MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
