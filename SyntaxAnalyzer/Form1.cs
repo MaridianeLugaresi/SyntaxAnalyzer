@@ -53,6 +53,9 @@ namespace SyntaxAnalyzer
             //validarTokens();
             IfCommand ifCommand = new IfCommand("if(a>b){c = 1;}", null);
             ifCommand.Validate(arquivo);
+
+            ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
+            forCommand.Validate(arquivo);
         }
 
         private bool validarTokens()

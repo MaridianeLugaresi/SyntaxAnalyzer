@@ -59,7 +59,7 @@ namespace SyntaxAnalyzer.Objects
 						} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
 					} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o comando IF"); return false; }
 				} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
-			} else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token 'if'"); return false; }
+			} else { return true; }
 		}
 
 		//C -> E R E 
