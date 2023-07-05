@@ -51,7 +51,7 @@ namespace SyntaxAnalyzer
             StreamReader arquivo = File.OpenText(openFileDialog.FileName);
             //IfCommand ifCommand = new IfCommand(richTextCode.ToString(), null);
             //validarTokens();
-            IfCommand ifCommand = new IfCommand("if(a>b){c = 1;}", null);
+            IfCommand ifCommand = new IfCommand();
             ifCommand.Validate(arquivo);
 
             ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);

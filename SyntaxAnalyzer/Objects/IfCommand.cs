@@ -11,14 +11,11 @@ namespace SyntaxAnalyzer.Objects
 {
     public class IfCommand
     {
-        public string Code { get; set; }
 		public string Tk { get; set; }
 		public List<string> Tokens { get; set; } = new List<string>();
 
-        public IfCommand(string code, string tk)
+        public IfCommand()
         {
-			Code = code;
-			Tk = tk;
         }
 
         public void Validate(StreamReader arquivo)
