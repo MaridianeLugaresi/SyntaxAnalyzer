@@ -14,10 +14,8 @@ namespace SyntaxAnalyzer.Objects
         public string Tk { get; set; }
         public List<string> Tokens { get; set; } = new List<string>();
 
-        public ForCommand(string code, string tk)
+        public ForCommand()
         {
-            Code = code;
-            Tk = tk;
         }
 
         public void Validate(StreamReader arquivo)
@@ -39,7 +37,7 @@ namespace SyntaxAnalyzer.Objects
 				if (Tk == Constants.TKAbreParenteses)
 				{
 					getToken();
-					if (E())
+					if (C())
 					{
 						if (Tk == Constants.TKPontoEVirgula)
 						{
@@ -49,7 +47,7 @@ namespace SyntaxAnalyzer.Objects
 								if (Tk == Constants.TKPontoEVirgula)
 								{
 									getToken();
-									if (E())
+									if (C())
 									{
 										if (Tk == Constants.TKFechaParenteses)
 										{
@@ -61,7 +59,6 @@ namespace SyntaxAnalyzer.Objects
 												{
 													if (Tk == Constants.TKFechaChaves)
 													{
-														getToken();
 														return true;
 													}
 													else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '}'"); return false; }
@@ -99,6 +96,10 @@ namespace SyntaxAnalyzer.Objects
 						return true;
 					}
 					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
+				}
+				else if (B())
+				{
+					return true;
 				}
 				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 			}
@@ -145,6 +146,21 @@ namespace SyntaxAnalyzer.Objects
 			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
 		}
 
+		private bool B()
+		{
+			if (Tk == Constants.TKDuploMais)
+			{
+				getToken();
+				return true;
+			}
+			else if (Tk == Constants.TKDuploMenos)
+			{
+				getToken();
+				return true;
+			}
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador (++, --)"); return false; }
+		}
+
 		//R -> == | != | < | > | <= | >= 
 		private bool R()
 		{
@@ -178,7 +194,12 @@ namespace SyntaxAnalyzer.Objects
 				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+			else if (Tk == Constants.TKAtribuicao)
+			{
+				getToken();
+				return true;
+			}
+			else { return false; }
 		}
 
 		private bool Operator()
@@ -234,17 +255,19 @@ namespace SyntaxAnalyzer.Objects
 
 		private void ProcessaPopulaArrayTokens(StreamReader sr)
 		{
-			string padrao = @"(\()|(\w+\s+)|(==)|(\w+\s+)|(\))|(\s+\{)|(\})";
+			string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
 			string linha;
 
 			while ((linha = sr.ReadLine()) != null)
 			{
 				string[] tokens = Regex.Split(linha, padrao);
 
-				// Print the tokens
 				foreach (string token in tokens)
 				{
-					Tokens.Add(token);
+					if (token != "")
+					{
+						Tokens.Add(token);
+					}
 				}
 			}
 		}

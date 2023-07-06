@@ -55,6 +55,6 @@ namespace SyntaxAnalyzer.Objects
         public const string TKPontoEVirgula = ";";
         public const string TKDoisPontos = ":";
         public const string TKDuploMais = "++";
-
+        public const string TKDuploMenos = "--";
     }
 }

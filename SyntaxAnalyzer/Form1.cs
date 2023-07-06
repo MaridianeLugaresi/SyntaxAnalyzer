@@ -50,36 +50,17 @@ namespace SyntaxAnalyzer
         {
             StreamReader arquivo = File.OpenText(openFileDialog.FileName);
 
-            IfCommand ifCommand = new IfCommand();
-            ifCommand.Validate(arquivo);
+            //IfCommand ifCommand = new IfCommand();
+            //ifCommand.Validate(arquivo);
 
-            ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
+            ForCommand forCommand = new ForCommand();
             forCommand.Validate(arquivo);
 
-            DoWhileCommand doWhileCommand = new DoWhileCommand("", null);
-            doWhileCommand.Validate(arquivo);
+            //DoWhileCommand doWhileCommand = new DoWhileCommand("", null);
+            //doWhileCommand.Validate(arquivo);
 
-            WhileCommand whileCommand = new WhileCommand();
-            whileCommand.Validate(arquivo);
-        }
-
-        private bool validarTokens()
-        {
-            const int finalArquivo = -1;
-            StreamReader arquivo = null;
-
-            int caracter;
-            char c;
-
-            arquivo = File.OpenText(openFileDialog.FileName);
-
-            while ((caracter = arquivo.Read()) != finalArquivo){
-                c = (char)caracter;
-                Console.WriteLine(caracter);
-            }
-
-            return true;
-
+            //WhileCommand whileCommand = new WhileCommand();
+            //whileCommand.Validate(arquivo);
         }
     }
 }

@@ -234,7 +234,6 @@ namespace SyntaxAnalyzer.Objects
             {
                 string[] tokens = Regex.Split(linha, padrao);
 
-                // Print the tokens
                 foreach (string token in tokens)
                 {
                     Tokens.Add(token);
