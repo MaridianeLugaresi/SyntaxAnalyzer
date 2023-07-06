@@ -24,7 +24,7 @@ namespace SyntaxAnalyzer.Objects
 			getToken();
 			if (S())
 			{
-				Message.ShowSuccessMessage("Tokens do comando IF validados com sucesso");
+				Message.ShowSuccessMessage("Tokens do comando IF validados com sucesso!");
 			}
 		}
 
@@ -207,8 +207,11 @@ namespace SyntaxAnalyzer.Objects
 
 		private void ProcessaPopulaArrayTokens(StreamReader sr)
 		{
-			string padrao = @"(\()|(\w+\s+)|(==)|(\w+\s+)|(\))|(\s+\{)|(\})";
+			string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
 			string linha;
+
+			sr.DiscardBufferedData();
+			sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
 
 			while ((linha = sr.ReadLine()) != null)
 			{
@@ -216,7 +219,10 @@ namespace SyntaxAnalyzer.Objects
 
 				foreach (string token in tokens)
 				{
-					Tokens.Add(token);
+					if (token != "")
+					{
+						Tokens.Add(token);
+					}
 				}
 			}
 			

@@ -24,7 +24,7 @@ namespace SyntaxAnalyzer.Objects
             getToken();
             if (S())
             {
-                Message.ShowSuccessMessage("Tokens validados com sucesso");
+                Message.ShowSuccessMessage("Tokens do comando FOR validados com sucesso!");
             }
         }
 
@@ -257,6 +257,9 @@ namespace SyntaxAnalyzer.Objects
 		{
 			string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
 			string linha;
+
+			sr.DiscardBufferedData();
+			sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
 
 			while ((linha = sr.ReadLine()) != null)
 			{

@@ -26,7 +26,7 @@ namespace SyntaxAnalyzer.Objects
             getToken();
             if (S())
             {
-                Message.ShowSuccessMessage("Tokens validados com sucesso");
+                Message.ShowSuccessMessage("Tokens do comando DOWHILE validados com sucesso!");
             }
         }
 
@@ -227,17 +227,23 @@ namespace SyntaxAnalyzer.Objects
 
         private void ProcessaPopulaArrayTokens(StreamReader sr)
         {
-            string padrao = @"(\()|(\w+\s+)|(==)|(\w+\s+)|(\))|(\s+\{)|(\})";
-            string linha;
+			string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
+			string linha;
 
-            while ((linha = sr.ReadLine()) != null)
+			sr.DiscardBufferedData();
+			sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+
+			while ((linha = sr.ReadLine()) != null)
             {
                 string[] tokens = Regex.Split(linha, padrao);
 
                 foreach (string token in tokens)
                 {
-                    Tokens.Add(token);
-                }
+					if (token != "")
+					{
+						Tokens.Add(token);
+					}
+				}
             }
         }
     }
