@@ -56,6 +56,9 @@ namespace SyntaxAnalyzer
 
             ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
             forCommand.Validate(arquivo);
+
+            DoWhileCommand doWhileCommand = new DoWhileCommand("", null);
+            doWhileCommand.Validate(arquivo);
         }
 
         private bool validarTokens()
