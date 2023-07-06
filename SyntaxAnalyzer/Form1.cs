@@ -49,13 +49,15 @@ namespace SyntaxAnalyzer
         private void button1_Click(object sender, EventArgs e)
         {
             StreamReader arquivo = File.OpenText(openFileDialog.FileName);
-            //IfCommand ifCommand = new IfCommand(richTextCode.ToString(), null);
-            //validarTokens();
-            IfCommand ifCommand = new IfCommand();
-            ifCommand.Validate(arquivo);
 
-            ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
-            forCommand.Validate(arquivo);
+            //IfCommand ifCommand = new IfCommand();
+            //ifCommand.Validate(arquivo);
+
+            //ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
+            //forCommand.Validate(arquivo);
+
+            WhileCommand whileCommand = new WhileCommand();
+            whileCommand.Validate(arquivo);
         }
 
         private bool validarTokens()

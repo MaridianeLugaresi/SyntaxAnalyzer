@@ -24,7 +24,7 @@ namespace SyntaxAnalyzer.Objects
 			getToken();
 			if (S())
 			{
-				Message.ShowSuccessMessage("Tokens validados com sucesso");
+				Message.ShowSuccessMessage("Tokens do comando IF validados com sucesso");
 			}
 		}
 
@@ -119,8 +119,8 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool NUM()
         {
-            if (Regex.IsMatch(Tk, @"^-?[0-9][0-9,\.]+$"))
-			{
+            if (Regex.IsMatch(Tk, @"^-?\d+(\.\d+)?$"))
+            {
                 getToken();
                 return true;
 			}
@@ -214,7 +214,6 @@ namespace SyntaxAnalyzer.Objects
 			{
 				string[] tokens = Regex.Split(linha, padrao);
 
-				// Print the tokens
 				foreach (string token in tokens)
 				{
 					Tokens.Add(token);
