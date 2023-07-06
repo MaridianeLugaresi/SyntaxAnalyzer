@@ -201,7 +201,7 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool NUM()
 		{
-			if (Regex.IsMatch(Tk, @"^-?[0-9][0-9,\.]+$"))
+			if (Regex.IsMatch(Tk, @"^-?\d+(\.\d+)?$"))
 			{
 				getToken();
 				return true;

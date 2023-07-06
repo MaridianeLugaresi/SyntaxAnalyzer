@@ -119,8 +119,8 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool NUM()
         {
-            if (Regex.IsMatch(Tk, @"^-?\d+(\.\d+)?$"))
-            {
+			if (Regex.IsMatch(Tk, @"^-?\d+(\.\d+)?$"))
+			{
                 getToken();
                 return true;
 			}
