@@ -49,9 +49,8 @@ namespace SyntaxAnalyzer
         private void button1_Click(object sender, EventArgs e)
         {
             StreamReader arquivo = File.OpenText(openFileDialog.FileName);
-            //IfCommand ifCommand = new IfCommand(richTextCode.ToString(), null);
-            //validarTokens();
-            IfCommand ifCommand = new IfCommand("if(a>b){c = 1;}", null);
+
+            IfCommand ifCommand = new IfCommand();
             ifCommand.Validate(arquivo);
 
             ForCommand forCommand = new ForCommand("for(i=0;i<10;i++)", null);
@@ -59,6 +58,9 @@ namespace SyntaxAnalyzer
 
             DoWhileCommand doWhileCommand = new DoWhileCommand("", null);
             doWhileCommand.Validate(arquivo);
+
+            WhileCommand whileCommand = new WhileCommand();
+            whileCommand.Validate(arquivo);
         }
 
         private bool validarTokens()
