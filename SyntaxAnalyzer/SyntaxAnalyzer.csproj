@@ -58,8 +58,10 @@
     <Compile Include="Objects\DoWhileCommand.cs" />
     <Compile Include="Objects\ForCommand.cs" />
     <Compile Include="Objects\IfCommand.cs" />
+    <Compile Include="Objects\MainValidation.cs" />
     <Compile Include="Objects\Message.cs" />
     <Compile Include="Objects\Token.cs" />
+    <Compile Include="Objects\Validations.cs" />
     <Compile Include="Objects\WhileCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

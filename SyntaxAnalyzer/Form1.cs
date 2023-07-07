@@ -50,17 +50,8 @@ namespace SyntaxAnalyzer
         {
             StreamReader arquivo = File.OpenText(openFileDialog.FileName);
 
-            IfCommand ifCommand = new IfCommand();
-            ifCommand.Validate(arquivo);
-
-            ForCommand forCommand = new ForCommand();
-            forCommand.Validate(arquivo);
-
-            DoWhileCommand doWhileCommand = new DoWhileCommand();
-            doWhileCommand.Validate(arquivo);
-
-            WhileCommand whileCommand = new WhileCommand();
-            whileCommand.Validate(arquivo);
+            Validations validations = new Validations();
+            validations.Validate(arquivo);
         }
     }
 }

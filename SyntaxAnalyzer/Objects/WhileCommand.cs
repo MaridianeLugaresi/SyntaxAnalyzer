@@ -14,25 +14,30 @@ namespace SyntaxAnalyzer.Objects
         public string Tk { get; set; }
         public List<string> Tokens { get; set; } = new List<string>();
 
-        public WhileCommand()
+        public WhileCommand(string tk, List<string> tokens)
         {
+            Tk = tk;
+            Tokens = tokens;
         }
 
-        public void Validate(StreamReader arquivo)
+        public bool Validate()
         {
-            ProcessaPopulaArrayTokens(arquivo);
-            getToken();
             if (S())
             {
-                Message.ShowSuccessMessage("Tokens do comando WHILE validados com sucesso!");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         //S -> while ( C ) { S } 
         private bool S()
         {
-            if (Tk == Constants.TKWhile)
+            if (Tokens[0] == Constants.TKWhile)
             {
+                getToken();
                 getToken();
                 if (Tk == Constants.TKAbreParenteses)
                 {
@@ -44,17 +49,7 @@ namespace SyntaxAnalyzer.Objects
                             getToken();
                             if (Tk == Constants.TKAbreChaves)
                             {
-                                getToken();
-                                if (S())
-                                {
-                                    if (Tk == Constants.TKFechaChaves)
-                                    {
-                                        getToken();
-                                        return true;
-                                    }
-                                    else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKFechaChaves); return false; }
-                                }
-                                else { return false; }
+                                return true;
                             }
                             else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKAbreChaves); return false; }
                         }
@@ -153,30 +148,6 @@ namespace SyntaxAnalyzer.Objects
                 return true;
             }
             else { return false; }
-        }
-
-
-        private void ProcessaPopulaArrayTokens(StreamReader sr)
-        {
-            string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
-            string linha;
-
-            sr.DiscardBufferedData();
-            sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
-
-            while ((linha = sr.ReadLine()) != null)
-            {
-                string[] tokens = Regex.Split(linha, padrao);
-
-                foreach (string token in tokens)
-                {
-                    if (token != "")
-                    {
-                        Tokens.Add(token);
-                    }
-                }
-            }
-
         }
 
         private void getToken()
