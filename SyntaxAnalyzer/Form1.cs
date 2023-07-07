@@ -56,7 +56,7 @@ namespace SyntaxAnalyzer
             ForCommand forCommand = new ForCommand();
             forCommand.Validate(arquivo);
 
-            DoWhileCommand doWhileCommand = new DoWhileCommand("", null);
+            DoWhileCommand doWhileCommand = new DoWhileCommand();
             doWhileCommand.Validate(arquivo);
 
             WhileCommand whileCommand = new WhileCommand();

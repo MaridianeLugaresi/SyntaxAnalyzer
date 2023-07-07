@@ -10,14 +10,11 @@ namespace SyntaxAnalyzer.Objects
 {
     public class DoWhileCommand
     {
-        public string Code { get; set; }
         public string Tk { get; set; }
         public List<string> Tokens { get; set; } = new List<string>();
 
-        public DoWhileCommand(string code, string tk)
+        public DoWhileCommand()
         {
-            Code = code;
-            Tk = tk;
         }
 
         public void Validate(StreamReader arquivo)
