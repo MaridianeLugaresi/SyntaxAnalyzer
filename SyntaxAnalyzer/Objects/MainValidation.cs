@@ -10,12 +10,12 @@ namespace SyntaxAnalyzer.Objects
 {
     public class MainValidation
     {
-        public string Tk { get; set; }
-        public List<string> Tokens { get; set; } = new List<string>();
+        public Token Token { get; set; }
+        public List<Token> Tokens { get; set; } = new List<Token>();
 
-        public MainValidation(string tk, List<string> tokens)
+        public MainValidation(Token tk, List<Token> tokens)
         {
-            Tk = tk;
+            Token = tk;
             Tokens = tokens;
         }
 
@@ -34,36 +34,36 @@ namespace SyntaxAnalyzer.Objects
 
         private bool S()
         {
-            if (Tk == Constants.TKInt)
+            if (Token.Tk == Constants.TKInt)
             {
                 getToken();
-                if (Tk == Constants.TKMain)
+                if (Token.Tk == Constants.TKMain)
                 {
                     getToken();
-                    if (Tk == Constants.TKAbreParenteses)
+                    if (Token.Tk == Constants.TKAbreParenteses)
                     {
                         getToken();
-                        if (Tk == Constants.TKFechaParenteses)
+                        if (Token.Tk == Constants.TKFechaParenteses)
                         {
                             getToken();
-                            if (Tk == Constants.TKAbreChaves)
+                            if (Token.Tk == Constants.TKAbreChaves)
                             {
                                 return true;
                             }
-                            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
+                            else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
                         }
-                        else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
+                        else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
                     }
-                    else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
+                    else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
                 }
-                else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKMain + "'"); return false; }
+                else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKMain + "'"); return false; }
             }
-            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKInt + "'"); return false; }
+            else { Message.ShowErrorMessage(Token.ToString() + "Esperava o token '" + Constants.TKInt + "'"); return false; }
         }
         
         private void getToken()
         {
-            Tk = Tokens[0];
+            Token = Tokens[0];
             Tokens.RemoveAt(0);
         }
     }

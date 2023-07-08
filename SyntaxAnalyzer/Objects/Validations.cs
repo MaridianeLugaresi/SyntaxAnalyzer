@@ -10,8 +10,8 @@ namespace SyntaxAnalyzer.Objects
 {
     public class Validations
     {
-        public string Tk { get; set; }
-        public List<string> Tokens { get; set; } = new List<string>();
+        public Token Token { get; set; }
+        public List<Token> Tokens { get; set; } = new List<Token>();
 
         public void Validate(StreamReader arquivo)
         {
@@ -21,17 +21,13 @@ namespace SyntaxAnalyzer.Objects
             {
                 Message.ShowSuccessMessage("Validação dos tokens realizada com sucesso!");
             }
-            else
-            {
-                Message.ShowErrorMessage("Houveram ocorrências de erro na validação!");
-            }
         }
 
         private bool ValidateTokens()
         {
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKInt)
+                if (Tokens[0].Tk == Constants.TKInt)
                 {
                     MainValidation mainValidation = new MainValidation(null, Tokens);
                     if (mainValidation.Validate())
@@ -47,7 +43,7 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKIf)
+                if (Tokens[0].Tk == Constants.TKIf)
                 {
                     IfCommand ifCommand = new IfCommand(null, Tokens);
                     if (ifCommand.Validate())
@@ -63,7 +59,7 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKFor)
+                if (Tokens[0].Tk == Constants.TKFor)
                 {
                     ForCommand forCommand = new ForCommand(null, Tokens);
                     if (forCommand.Validate())
@@ -79,7 +75,7 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKDo)
+                if (Tokens[0].Tk == Constants.TKDo)
                 {
                     DoWhileCommand doWhileCommand = new DoWhileCommand(null, Tokens);
                     if (doWhileCommand.Validate())
@@ -95,7 +91,7 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKWhile)
+                if (Tokens[0].Tk == Constants.TKWhile)
                 {
                     WhileCommand whileCommand = new WhileCommand(null, Tokens);
                     if (whileCommand.Validate())
@@ -111,11 +107,11 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Tokens[0] == Constants.TKFechaChaves)
+                if (Tokens[0].Tk == Constants.TKFechaChaves)
                 {
                     getToken();
                 }
-                else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKFechaChaves); return false; }
+                else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token " + Constants.TKFechaChaves); return false; }
             }
             else { return false; }
 
@@ -130,15 +126,18 @@ namespace SyntaxAnalyzer.Objects
             sr.DiscardBufferedData();
             sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
 
+            int countLinha = 0;
+
             while ((linha = sr.ReadLine()) != null)
             {
+                countLinha++;
                 string[] tokens = Regex.Split(linha, padrao);
 
                 foreach (string token in tokens)
                 {
-                    if (token != "")
+                    if (token != "" && token != "\t")
                     {
-                        Tokens.Add(token);
+                        Tokens.Add(new Token(token, countLinha));
                     }
                 }
             }
@@ -146,7 +145,7 @@ namespace SyntaxAnalyzer.Objects
 
         private void getToken()
         {
-            Tk = Tokens[0];
+            Token = Tokens[0];
             Tokens.RemoveAt(0);
         }
     }

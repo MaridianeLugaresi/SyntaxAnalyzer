@@ -10,12 +10,12 @@ namespace SyntaxAnalyzer.Objects
 {
     public class ForCommand
     {
-        public string Tk { get; set; }
-        public List<string> Tokens { get; set; } = new List<string>();
+		public Token Token { get; set; }
+		public List<Token> Tokens { get; set; } = new List<Token>();
 
-        public ForCommand(string tk, List<string> tokens)
+		public ForCommand(Token tk, List<Token> tokens)
         {
-			Tk = tk;
+			Token = tk;
 			Tokens = tokens;
         }
 
@@ -31,55 +31,50 @@ namespace SyntaxAnalyzer.Objects
 			}
 		}
 
-		private void setTokens(List<string> tokens)
-		{
-			Tokens = tokens;
-		}
-
 		//S -> for ( E ; C ; E ) { S } 
 		private bool S()
 		{
-			if (Tokens[0] == Constants.TKFor)
+			if (Tokens[0].Tk == Constants.TKFor)
 			{
 				getToken();
 				getToken();
-				if (Tk == Constants.TKAbreParenteses)
+				if (Token.Tk == Constants.TKAbreParenteses)
 				{
 					getToken();
 					if (C())
 					{
-						if (Tk == Constants.TKPontoEVirgula)
+						if (Token.Tk == Constants.TKPontoEVirgula)
 						{
 							getToken();
 							if (C())
 							{
-								if (Tk == Constants.TKPontoEVirgula)
+								if (Token.Tk == Constants.TKPontoEVirgula)
 								{
 									getToken();
 									if (C())
 									{
-										if (Tk == Constants.TKFechaParenteses)
+										if (Token.Tk == Constants.TKFechaParenteses)
 										{
 											getToken();
-											if (Tk == Constants.TKAbreChaves)
+											if (Token.Tk == Constants.TKAbreChaves)
 											{
 												return true;
 											}
-											else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
+											else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
 										}
-										else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
+										else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
 									}
-									else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
+									else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma expressão para validar o token"); return false; }
 								}
-								else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
+								else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 							}
-							else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando"); return false; }
+							else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando"); return false; }
 						}
-						else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
+						else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
+					else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma expressão para validar o token"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
+				else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 			}
 			else { return true; }
 		}
@@ -95,15 +90,15 @@ namespace SyntaxAnalyzer.Objects
 					{
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
+					else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma expressão para validar o token"); return false; }
 				}
 				else if (B())
 				{
 					return true;
 				}
-				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+				else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
+			else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando expressão"); return false; }
 		}
 
 		//E -> ID | NUM | E OP E | ( E ) 
@@ -125,76 +120,76 @@ namespace SyntaxAnalyzer.Objects
 					{
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
+					else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando expressão"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
+				else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um operador lógico(==, !=, <, >, <=, >=)"); return false; }
 			}
-			else if (Tk == Constants.TKAbreParenteses)
+			else if (Token.Tk == Constants.TKAbreParenteses)
 			{
 				getToken();
 				if (E())
 				{
-					if (Tk == Constants.TKFechaParenteses)
+					if (Token.Tk == Constants.TKFechaParenteses)
 					{
 						getToken();
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
+					else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
+				else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando expressão"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
+			else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 		}
 
 		private bool B()
 		{
-			if (Tk == Constants.TKDuploMais)
+			if (Token.Tk == Constants.TKDuploMais)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKDuploMenos)
+			else if (Token.Tk == Constants.TKDuploMenos)
 			{
 				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador (++, --)"); return false; }
+			else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um operador (++, --)"); return false; }
 		}
 
 		//R -> == | != | < | > | <= | >= 
 		private bool R()
 		{
-			if (Tk == Constants.TKIgualLogico)
+			if (Token.Tk == Constants.TKIgualLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKDiferenteLogico)
+			else if (Token.Tk == Constants.TKDiferenteLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKMenorLogico)
+			else if (Token.Tk == Constants.TKMenorLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKMaiorLogico)
+			else if (Token.Tk == Constants.TKMaiorLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKMenorIgualLogico)
+			else if (Token.Tk == Constants.TKMenorIgualLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKMaiorIgualLogico)
+			else if (Token.Tk == Constants.TKMaiorIgualLogico)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKAtribuicao)
+			else if (Token.Tk == Constants.TKAtribuicao)
 			{
 				getToken();
 				return true;
@@ -204,32 +199,32 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool Operator()
 		{
-			if (Tk == Constants.TKSoma)
+			if (Token.Tk == Constants.TKSoma)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKSubtracao)
+			else if (Token.Tk == Constants.TKSubtracao)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKMultiplicacao)
+			else if (Token.Tk == Constants.TKMultiplicacao)
 			{
 				getToken();
 				return true;
 			}
-			else if (Tk == Constants.TKDivisao)
+			else if (Token.Tk == Constants.TKDivisao)
 			{
 				getToken();
 				return true;
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um operador(+, -, /, *)"); return false; }
+			else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um operador(+, -, /, *)"); return false; }
 		}
 
 		private bool NUM()
 		{
-			if (Regex.IsMatch(Tk, @"^-?\d+(\.\d+)?$"))
+			if (Regex.IsMatch(Token.Tk, @"^-?\d+(\.\d+)?$"))
 			{
 				getToken();
 				return true;
@@ -239,7 +234,7 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool ID()
 		{
-			if (Regex.IsMatch(Tk, @"^[a-zA-Z]+$"))
+			if (Regex.IsMatch(Token.Tk, @"^[a-zA-Z]+$"))
 			{
 				getToken();
 				return true;
@@ -249,7 +244,7 @@ namespace SyntaxAnalyzer.Objects
 
 		private void getToken()
 		{
-			Tk = Tokens[0];
+			Token = Tokens[0];
 			Tokens.RemoveAt(0);
 		}
 	}
