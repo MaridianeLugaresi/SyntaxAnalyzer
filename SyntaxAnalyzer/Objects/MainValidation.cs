@@ -50,15 +50,15 @@ namespace SyntaxAnalyzer.Objects
                             {
                                 return true;
                             }
-                            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '{'"); return false; }
+                            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
                         }
-                        else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+                        else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
                     }
-                    else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
+                    else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
                 }
-                else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token 'main'"); return false; }
+                else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKMain + "'"); return false; }
             }
-            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token 'int'"); return false; }
+            else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKInt + "'"); return false; }
         }
         
         private void getToken()

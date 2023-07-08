@@ -51,13 +51,13 @@ namespace SyntaxAnalyzer.Objects
                             {
                                 return true;
                             }
-                            else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKAbreChaves); return false; }
+                            else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
                         }
-                        else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKFechaParenteses); return false; }
+                        else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
                     }
                     else { return false; }
                 }
-                else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKAbreParenteses); return false; }
+                else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
             }
             else { return true; }
         }

@@ -36,12 +36,12 @@ namespace SyntaxAnalyzer.Objects
                     MainValidation mainValidation = new MainValidation(null, Tokens);
                     if (mainValidation.Validate())
                     {
-                        ValidateTokens();
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
 
@@ -52,12 +52,12 @@ namespace SyntaxAnalyzer.Objects
                     IfCommand ifCommand = new IfCommand(null, Tokens);
                     if (ifCommand.Validate())
                     {
-                        ValidateTokens();
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
 
@@ -68,12 +68,12 @@ namespace SyntaxAnalyzer.Objects
                     ForCommand forCommand = new ForCommand(null, Tokens);
                     if (forCommand.Validate())
                     {
-                        ValidateTokens();
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
 
@@ -84,12 +84,12 @@ namespace SyntaxAnalyzer.Objects
                     DoWhileCommand doWhileCommand = new DoWhileCommand(null, Tokens);
                     if (doWhileCommand.Validate())
                     {
-                        ValidateTokens();
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
 
@@ -100,12 +100,12 @@ namespace SyntaxAnalyzer.Objects
                     WhileCommand whileCommand = new WhileCommand(null, Tokens);
                     if (whileCommand.Validate())
                     {
-                        ValidateTokens();
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
 
@@ -115,11 +115,9 @@ namespace SyntaxAnalyzer.Objects
                 {
                     getToken();
                 }
-                else
-                {
-                    return false;
-                }
+                else { Message.ShowErrorMessage("Token: " + Tk + "Esperava o token " + Constants.TKFechaChaves); return false; }
             }
+            else { return false; }
 
             return true;
         }

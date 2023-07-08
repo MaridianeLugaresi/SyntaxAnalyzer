@@ -65,21 +65,21 @@ namespace SyntaxAnalyzer.Objects
 											{
 												return true;
 											}
-											else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '{'"); return false; }
+											else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreChaves + "'"); return false; }
 										}
-										else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+										else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
 									}
 									else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
 								}
-								else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ';'"); return false; }
+								else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 							}
 							else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando"); return false; }
 						}
-						else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ';'"); return false; }
+						else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 					}
 					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
 				}
-				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
+				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 			}
 			else { return true; }
 		}
@@ -139,11 +139,11 @@ namespace SyntaxAnalyzer.Objects
 						getToken();
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
 				}
 				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 		}
 
 		private bool B()

@@ -61,17 +61,17 @@ namespace SyntaxAnalyzer.Objects
 											{
 												return true;
 											}
-											else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ';'"); return false; }
+											else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 										}
-										else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+										else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses + "'"); return false; }
 									}
 									else { Message.ShowErrorMessage("Esperava um comando"); return false; }
 								}
-								else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '('"); return false; }
+								else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 							}
-							else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token 'while'"); return false; }
+							else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKWhile + "'"); return false; }
 						}
-						else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '}'"); return false; }
+						else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaChaves + "'"); return false; }
 					}
 					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava uma expressão para validar o token"); return false; }
 				}
@@ -131,11 +131,11 @@ namespace SyntaxAnalyzer.Objects
 						getToken();
 						return true;
 					}
-					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+					else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKFechaParenteses); return false; }
 				}
 				else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava um comando expressão"); return false; }
 			}
-			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token ')'"); return false; }
+			else { Message.ShowErrorMessage("Token:" + Tk + " " + "Esperava o token '" + Constants.TKAbreParenteses + "'"); return false; }
 		}
 
 		//R -> == | != | < | > | <= | >= 
