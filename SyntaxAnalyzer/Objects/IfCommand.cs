@@ -48,7 +48,6 @@ namespace SyntaxAnalyzer.Objects
 							getToken();
 							if (Token.Tk == Constants.TKAbreChaves)
 							{
-								getToken();
 								return true;
 							} else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '{'"); return false; }
 						} else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token ')'"); return false; }
@@ -132,7 +131,10 @@ namespace SyntaxAnalyzer.Objects
 				getToken();
 				return true;
 			}
-			else { return false; }
+			else
+			{
+				return false;
+			}
 		}
 
 		//R -> == | != | < | > | <= | >= 

@@ -21,6 +21,10 @@ namespace SyntaxAnalyzer.Objects
             {
                 Message.ShowSuccessMessage("Validação dos tokens realizada com sucesso!");
             }
+            else
+            {
+                Message.ShowErrorMessage("Ocorreu algum erro ao validar a expressão!");
+            }
         }
 
         private bool ValidateTokens()
@@ -130,6 +134,8 @@ namespace SyntaxAnalyzer.Objects
 
             while ((linha = sr.ReadLine()) != null)
             {
+                linha = RetornaStringFormatada(linha);
+
                 countLinha++;
                 string[] tokens = Regex.Split(linha, padrao);
 
@@ -141,6 +147,13 @@ namespace SyntaxAnalyzer.Objects
                     }
                 }
             }
+        }
+
+        private string RetornaStringFormatada(string sentence)
+        {
+            sentence = sentence.Replace("\t", "");
+
+            return sentence;
         }
 
         private void getToken()
