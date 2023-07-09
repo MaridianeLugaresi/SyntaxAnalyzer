@@ -170,7 +170,7 @@ namespace SyntaxAnalyzer.Objects
 
                 foreach (string token in tokens)
                 {
-                    if (token != "" && token != "\t")
+                    if (token != "" && token != " " && token != "\t")
                     {
                         Tokens.Add(new Token(token, countLinha));
                     }

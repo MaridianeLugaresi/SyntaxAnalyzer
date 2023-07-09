@@ -35,38 +35,29 @@ namespace SyntaxAnalyzer.Objects
 			getToken();
 			if (Constant())
 			{
-				getToken();
 				if (Attribution())
 				{
-					getToken();
 					if (Constant())
 					{
-						getToken();
 						if (Token.Tk == Constants.TKPontoEVirgula)
 						{
 							return true;
 						}
 						else
 						{
-							if (Constant())
+							if (Operator())
 							{
-								getToken();
-								if (Operator())
+								if (Constant())
 								{
-									getToken();
-									if (Constant())
+									if (Token.Tk == Constants.TKPontoEVirgula)
 									{
-										if (Token.Tk == Constants.TKPontoEVirgula)
-										{
-											return true;
-										}
-										else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
+										return true;
 									}
-									else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma constante"); return false; }
+									else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava o token '" + Constants.TKPontoEVirgula + "'"); return false; }
 								}
-								else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando de operador"); return false; }
+								else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma constante"); return false; }
 							}
-							else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava uma constante"); return false; }
+							else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um comando de operador"); return false; }	
 						}
 					}
 					else
@@ -85,9 +76,14 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool Constant()
 		{
-			if (Regex.IsMatch(Token.Tk, @"^[a-zA-Z]?[0-9]*\.?[0-9]|([0-9]?[a-zA-Z]+)?$"))
+			if (Token.Tk != ";")
 			{
-				return true;
+				if (Regex.IsMatch(Token.Tk, @"^[a-zA-Z]?[0-9]*\.?[0-9]|([0-9]?[a-zA-Z]+)?$"))
+				{
+					getToken();
+					return true;
+				}
+				else { return false; }
 			}
 			else { return false; }
 		}
@@ -96,34 +92,42 @@ namespace SyntaxAnalyzer.Objects
 		{
 			if (Token.Tk == Constants.TKAtribuicao)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKAtribuicaoIncremento)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKAtribuicaoDecremento)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKAtribuicaoMultiplicacao)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKAtribuicaoDivisao)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKAtribuicaoResto)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKDuploMais)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKDuploMenos)
 			{
+				getToken();
 				return true;
 			}
 			else { return false; }
@@ -133,18 +137,22 @@ namespace SyntaxAnalyzer.Objects
 		{
 			if (Token.Tk == Constants.TKSoma)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKSubtracao)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKMultiplicacao)
 			{
+				getToken();
 				return true;
 			}
 			else if (Token.Tk == Constants.TKDivisao)
 			{
+				getToken();
 				return true;
 			}
 			else { Message.ShowErrorMessage(Token.ToString() + " " + "Esperava um operador(+, -, /, *)"); return false; }
