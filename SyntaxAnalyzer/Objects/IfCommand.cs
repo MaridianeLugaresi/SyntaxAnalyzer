@@ -126,7 +126,7 @@ namespace SyntaxAnalyzer.Objects
 
 		private bool ID()
 		{
-			if (Regex.IsMatch(Token.Tk, @"^[a-zA-Z]+$"))
+			if (Regex.IsMatch(Token.Tk, @"^[a-zA-Z]?[0-9]|([0-9]?[a-zA-Z]+)?$"))
 			{
 				getToken();
 				return true;
@@ -145,7 +145,7 @@ namespace SyntaxAnalyzer.Objects
 				getToken();
 				return true;
 			}
-			else if (Token.Tk == Constants.TKDiferenteLogico)
+			else if (Token.Tk == Constants.TKNegacaoLogico)
 			{
 				getToken();
 				return true;

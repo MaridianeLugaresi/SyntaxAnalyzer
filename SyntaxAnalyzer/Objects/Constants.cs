@@ -43,6 +43,7 @@ namespace SyntaxAnalyzer.Objects
         public const string TKBitwiseRightshift = ">>";
         public const string TKAnd = "&&";
         public const string TKOr = "||";
+        public const string TKNegacaoLogico = "!=";
         public const string TKNegacao = "!";
         public const string TKAtribuicao = "=";
         public const string TKAtribuicaoIncremento = "+=";

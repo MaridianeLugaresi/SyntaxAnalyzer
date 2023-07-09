@@ -111,6 +111,22 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
+                if (Constant())
+                {
+                    AttributionCommand attributionCommand = new AttributionCommand(null, Tokens);
+                    if (attributionCommand.Validate())
+                    {
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
+                    }
+                    else { return false; }
+                }
+            }
+
+            if (Tokens.Count > 0)
+            {
                 if (Tokens[0].Tk == Constants.TKFechaChaves)
                 {
                     getToken();
@@ -122,9 +138,22 @@ namespace SyntaxAnalyzer.Objects
             return true;
         }
 
+        private bool Constant()
+        {
+            if (Tokens[0].Tk != "}")
+            {
+                if (Regex.IsMatch(Tokens[0].Tk, @"^[a-zA-Z]?[0-9]*\.?[0-9]|([0-9]?[a-zA-Z]+)?$"))
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
+
         private void ProcessaPopulaArrayTokens(StreamReader sr)
         {
-            string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(\w+\s+)|(\))|(\s+\{)|(\})";
+            string padrao = @"(\()|(\+\+)|(--)|(\-)|(\+)|(\w+\s+)|(==)|(=)|(;)|(<)|(>)|(>=)|(<=)|(&&)|(!=)|(\w+\s+)|(\))|(\s+\{)|(\})";
             string linha;
 
             sr.DiscardBufferedData();
