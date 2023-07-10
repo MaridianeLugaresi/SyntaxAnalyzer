@@ -111,10 +111,26 @@ namespace SyntaxAnalyzer.Objects
 
             if (Tokens.Count > 0)
             {
-                if (Constant())
+                if (Constant() && Tokens[1].Tk == Constants.TKAtribuicao)
                 {
                     AttributionCommand attributionCommand = new AttributionCommand(null, Tokens);
                     if (attributionCommand.Validate())
+                    {
+                        if (ValidateTokens())
+                        {
+                            return true;
+                        }
+                    }
+                    else { return false; }
+                }
+            }
+
+            if (Tokens.Count > 0)
+            {
+                if (Constant())
+                {
+                    DeclarationCommand declarationCommand = new DeclarationCommand(null, Tokens);
+                    if (declarationCommand.Validate())
                     {
                         if (ValidateTokens())
                         {

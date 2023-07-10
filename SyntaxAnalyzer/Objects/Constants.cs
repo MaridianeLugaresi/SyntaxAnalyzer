@@ -10,8 +10,8 @@ namespace SyntaxAnalyzer.Objects
     {
         public const string TKMain = "main";
         public const string TKInt = "int ";
-        public const string TKFloat = "float";
-        public const string TKChar = "char";
+        public const string TKFloat = "float ";
+        public const string TKChar = "char ";
         public const string TKVolatile = "volatile";
         public const string TKDouble = "double";
         public const string TKIf = "if";

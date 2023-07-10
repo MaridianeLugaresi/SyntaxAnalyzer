@@ -56,6 +56,7 @@
     <Compile Include="Objects\AttributionCommand.cs" />
     <Compile Include="Objects\Code.cs" />
     <Compile Include="Objects\Constants.cs" />
+    <Compile Include="Objects\DeclarationCommand.cs" />
     <Compile Include="Objects\DoWhileCommand.cs" />
     <Compile Include="Objects\ForCommand.cs" />
     <Compile Include="Objects\IfCommand.cs" />
