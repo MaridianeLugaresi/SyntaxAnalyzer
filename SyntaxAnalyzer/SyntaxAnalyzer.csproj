@@ -104,6 +104,8 @@
     <None Include="Resources\run96.ico" />
     <None Include="Resources\run.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Executable\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
